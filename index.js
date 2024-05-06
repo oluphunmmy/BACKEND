@@ -63,7 +63,7 @@ app.get('/data', (req, res)=>{
 res.json(data)
 })
 
-
+//connecting my app to the database
 mongoose.connect("mongodb+srv://olufunmilayoagboola:oluphunmmy@cluster0.oevanns.mongodb.net/Backend?retryWrites=true&w=majority&appName=Cluster0")
 //helps to manage request either successful or failed
 .then(()=>{
