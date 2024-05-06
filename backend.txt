@@ -1,0 +1,70 @@
+INTRODUCTION TO NODE.JS
+- Created in 2009 by Ryan Dahi
+- created to fix limitations to traditional web servers
+Problems such as memory issues, time it takes to fetch data i.e (read and write operations) etc
+- Reason why Asynchronous operation was developed
+
+KEY REASONS TO USE NODE.JS
+- Javascript Everywhere: You don't have to change to a new language
+- Asynchronous operation: Helps to handle multiple task simultaneously
+- Rich Ecosystem: One get enough help online
+- Scalable
+- 
+ASYNCHRONOUS NATURE OF NODE.JS
+-This is simply means the ability to perform talk simultaneously
+
+BASIC NODE.JS CONCEPTS
+- Node js is like a tool box, it contains several tools to build application like Javascript.
+- modules:- Reuseable pieces of codes. is used to orgnaize code in different pieces
+- Event driven:- (for example use state in fronent). allows to handle multiple operations
+npm (node package manager(tool box)):- Helps to install and  manage libraries
+- Node Js saves time and effort
+
+SETTING NODE.JS ENVIRONMENT
+-Download Node
+- install Node
+- Verify installation (node --verion)
+
+30/04/2024 EXPRESS JS
+- It is used specifically for making building web application easy
+- Express.js is made from NodeJs
+
+-intitialize node js by (npm init -Y)
+- install node js (npm i express) 
+
+CREATING ROUTES AND HANDLING HTTPS REQUEST
+ROUTES are paths to handle request and responses
+-HTTPS request are more like visiting a website in your browser
+- HTTP response is what you get back from the servers
+
+TYPES OF HTTP REQUEST
+- GET - data from the server is fetched with this request
+-POST- used to submit data to the server
+- PUT - to update resourceon the server
+- DELETE - to delete resource from the server
+
+ANATOMY OF HTTP REQUEST
+- URL - Helps to specify the address of the resource you want to access
+- METHOD - specifies the type of request (GET, POST, PUT, DELETE)
+- Headers - additional information about the request e.g content-type
+- BODY: Contains the data to be sent to the server (JSON etc)
+
+HANDLING HTTP REQUEST IN WEB APPLICATION
+
+INSTALLATION 
+npm init -y 
+npm install express
+npm install nodemon
+npm install mongodb
+npm install mongoose
+
+
+Documentation
+npm js.com(search for mongoose)
+
+
+mongodb+srv://olufunmilayoagboola:HmcmW1wb9U2RMEtv@cluster0.oevanns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+
+
+insomnia api testing
