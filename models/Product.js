@@ -19,7 +19,11 @@ const ProductSchema = mongoose.Schema(
         Image: {
             type: String,
             require: false
-        }
+        },
+        Address:{
+            type: String,
+            require: [true, "please enter your address"]
+        },
         
     },
 
