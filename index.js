@@ -1,78 +1,93 @@
 const express = require('express') //initializing express
-const mongoose = require('mongoose');
-const Product = require('./models/Product.js'); //importing product data in other to use the format to populate the database
+const mongoose = require('mongoose')
+// const Book = require('./models/bookModels.js') //importing product data in other to use the format to populate the database
+const bookRouter = require('./routes/book.route.js')
+const cors = require('cors')
 const app = express() //using express to create our route
 app.use(express.json()) //midware
+app.use(express.urlencoded({extended: false}))
+app.use(cors())
+// app.use(cors({
+//     origin: "http://localhost/3001",
+//     methods: ['GET', 'POST', 'PUT', 'DELETE']
+//     allowHeaders: ['content-type']
+// }))
+
+app.use('/api/book', bookRouter)
 
 //setting up the server to listen at port 3000
-app.listen(3000, (req, res)=>{
+app.listen(3001, (req, res)=>{
 
-    console.log("Server is Running at 3000")
+    console.log("Server is Running at 3001")
 })
 
-//how to create a route '/'
+// app.post('/api/book', async (req, res)=>{
+//     try {
+//         if (
+//             !req.body.title ||
+//             !req.body.author ||
+//             !req.body.publishedYear
+//         ){
+//             return res.status(400).send({
+//                 message: "send all required fields: title, author, published year"
+//             })
+//         }
+//         const book = await Book.create(req.body)
+//         res.status(200).json(book)
+//     }catch (error){
+//         console.log(error)
+//         res.status(500).json({message: error.message})
+//     }
+// })
+// app.get('/api/book', async (req, res)=>{
+//     try {
+//         const books = await Book.find({})
+//         res.status(200).json({count: books.length,
+//             data: books
+//         });
 
-app.get('/', (req, res)=>{
-    res.send("Welcome to the Home Screen")
-})
-//creating route for /products on the database
-app.post('/api/products', async (req, res)=>{
-    try {
-        const product = await Product.create(req.body)
-        res.status(200).json(product)
+//     }catch (error) {
+//         //server error (status code) by specifiying the format in json
+//         res.status(500).json({message: error.message})
+//     }
+// })
+// app.get('/api/book/:id', async (req, res)=>{
+//     try {
+//         const {id} = req.params;
+//     const book = await Book.findById(id);
+//     res.status(200).json(book)
+//     }catch (error){
 
-    }catch (error) {
-        //server error (status code) by specifiying the format in json
-        res.status(500).json({message: error.message})
-    }
-})
-app.get('/api/products', async (req, res)=>{
-    try {
-        const product = await Product.find({})
-        res.status(200).json(product)
+//         res.status(500).json({message: error.message})
+//     }
+// })
 
-    }catch (error) {
-        //server error (status code) by specifiying the format in json
-        res.status(500).json({message: error.message})
-    }
-})
+// app.put('/api/book/:id', async (req, res)=>{
+//     try{
+//         const {id} = req.params;
+//         const book = await Book.findByIdAndUpdate(id, re.body)
+//         if (!book){
+//             return res.status(404).json({message: 'Book not found'})
+//         }
+//         const updatedBook = Book.findById(id)
+//         res.status(200).json(updatedBook)
+//     }catch (error) {
+//         res.status(500).json({message: error.message})
+//     }
+// })
+// app.delete('/api/book/:id', async (req, res)=>{
+//     try{
+//         const {id} = req.params;
+//         const book = await Book.findByIdAndDelete(id)
+//         if (!book){4
+//             return res.status(404).json({message: 'unable to delete: Book not found'})
+//         }
+//         res.status(200).json({message: "Book deleted successfully!"})
+//     }catch (error) {
+//         res.status(500).json({message: error.message})
+//     }
+// })
 
-
-app.get('/data', (req, res)=>{
-
-    const data = [
-
-        {
-              id: 1,
-              name: "Mark Zedrigex",
-              stack: "Software Engineer",
-              address: "Montgomery Austin TX 1234",
-              status: "Employed",
-              salary: 5000000,
-              country: "New Zealand"
-          },
-          {
-              id: 2,
-              name: "Henry Crogan",
-              stack: "Software Engineer",
-              address: "Brooklyn",
-              status: "Employed",
-              salary: 7000000,
-              country: "Broklyn"
-          },
-          {
-            id: 3,
-              name: "Judge Washington",
-              stack: "Software Engineer",
-              address: "Miami",
-              status: "Employed",
-              salary: 7000000,
-              country: "USA"
-          }
-        ];
-
-res.json(data)
-})
 
 //connecting my app to the database
 mongoose.connect("mongodb+srv://olufunmilayoagboola:oluphunmmy@cluster0.oevanns.mongodb.net/Backend?retryWrites=true&w=majority&appName=Cluster0")

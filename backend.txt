@@ -68,3 +68,9 @@ mongodb+srv://olufunmilayoagboola:HmcmW1wb9U2RMEtv@cluster0.oevanns.mongodb.net/
 
 
 insomnia api testing
+npm install cors:- 
+CROSS ORIGIN REQUESTS:- Helps to access control origin, it's like a mediator
+between two browsers. cross is like a security feature . it is to prevent user'saves
+cors is used to interact with the backend; to make request
+A policy/rule that checks for a request. trying to make a request between two origins(CORS)
+npm i react-router-dom
