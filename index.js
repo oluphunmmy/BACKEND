@@ -1,12 +1,15 @@
-const express = require('express') //initializing express
-const mongoose = require('mongoose')
+const express = require('express'); //initializing express
+const mongoose = require('mongoose');
 // const Book = require('./models/bookModels.js') //importing product data in other to use the format to populate the database
 const bookRouter = require('./routes/book.route.js')
+const userRouter = require('./routes/user.route.js')
 const cors = require('cors')
 const app = express() //using express to create our route
 app.use(express.json()) //midware
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
+const Usermod = require('./models/UserModel.js')
+
 // app.use(cors({
 //     origin: "http://localhost/3001",
 //     methods: ['GET', 'POST', 'PUT', 'DELETE']
@@ -14,8 +17,32 @@ app.use(cors())
 // }))
 
 app.use('/api/book', bookRouter)
+app.use('/auth/book', userRouter)
+// app.use('/login', userRouter)
+
+// app.post('/login', async (req, res)=>{
+//     try {
+//         const {email, password} = req.body
+//         Usermod.findOne({email: email})
+//             .then(user=>{
+//                 if(user){
+//                     if(user.password === password){
+//                         res.json("successful")
+//                     }else{
+//                         res.json("password is incorrect")
+//                     }
+//                 }else{
+//                     res.json("No record existed")
+//                 }
+//             })
+        
+
+//     } catch (error) {}
+// })
 
 //setting up the server to listen at port 3000
+
+
 app.listen(3001, (req, res)=>{
 
     console.log("Server is Running at 3001")
@@ -90,7 +117,7 @@ app.listen(3001, (req, res)=>{
 
 
 //connecting my app to the database
-mongoose.connect("mongodb+srv://olufunmilayoagboola:oluphunmmy@cluster0.oevanns.mongodb.net/Backend?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://olufunmilayoagboola:9XESzvepp00qYTuS@cluster0.oevanns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 //helps to manage request either successful or failed
 .then(()=>{
     console.log("Connection Successful!")

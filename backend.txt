@@ -74,3 +74,15 @@ between two browsers. cross is like a security feature . it is to prevent user's
 cors is used to interact with the backend; to make request
 A policy/rule that checks for a request. trying to make a request between two origins(CORS)
 npm i react-router-dom
+install on frontend folder:- npm install --save react-toastify
+
+material ui for design templates the library must be installed 
+inother to make use of it
+
+npm install bcrypt-  for authentication
+npm install jsonwebtoken - to be installed at the backend
+
+v2ttRVSG1RX1jRHp
+mongodb+srv://olufunmilayoagboola:v2ttRVSG1RX1jRHp@cluster0.groczbr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+9XESzvepp00qYTuS
