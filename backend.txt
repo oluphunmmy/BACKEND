@@ -58,6 +58,8 @@ npm install nodemon
 npm install mongodb
 npm install mongoose
 
+npm install dotenv
+
 
 Documentation
 npm js.com(search for mongoose)
@@ -86,3 +88,11 @@ v2ttRVSG1RX1jRHp
 mongodb+srv://olufunmilayoagboola:v2ttRVSG1RX1jRHp@cluster0.groczbr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 9XESzvepp00qYTuS
+npm install multer - allows to store data in the
+cloudinary
+
+npm create vite@latest
+select a framework: React
+select a variant: Javascript
+now type npm install
+now the frontend project can now be run with npm run dev

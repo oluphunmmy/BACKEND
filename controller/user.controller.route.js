@@ -1,23 +1,35 @@
 const Usermod = require('../models/UserModel.js')
+const bcrypt = require('bcryptjs')
+ const jwt = require('jsonwebtoken')
+
+ const secret = "trop27@_^sjsk"
 
 const signin = async (req, res) =>{
     try{
         const {email, password} = req.body
-        Usermod.findOne({email: email})
-            .then(user=>{
-                if(user){
-                    if(user.password === password){
-                        res.json("successful")
-                    }else{
-                        res.json("password is incorrect")
-                    }
-                }else{
-                    res.json("No record existed")
+        const user = await Usermod.findOne({email: email})
+            
+                if(!user){
+                    return res.status(401).json({message: "Invalide email or password"})
                 }
-            })
-        
+                const isMatch = await bcrypt.compare(password, user.password)
+                if (!isMatch){
+                    return res.status(401).json({message: "Invalid email password"})
+                }
+                
+                const payload = {userId: user._id}
+            const token = jwt.sign(payload, secret, {expiresIn: '1h'} )
+                
+
+                res.json({
+                    message: "Successful login",
+                    token: token
+                })
+
     } catch (error){
-        res.status(500).json({message: error.message})
+
+
+        res.status(500).json({message: "server error"})
     }
 
 
@@ -37,14 +49,25 @@ const signup = async (req, res) =>{
       }
     
         
-           const userReg = await Usermod.create(req.body)
-            res.status(200).json(userReg)
-            
+           const {firstname, lastname, email, password} = req.body
+           const salt = await bcrypt.genSalt(10);
+           const harshedpassword = await bcrypt.hash(password, salt)
+           const user = new Usermod({
+            firstname,
+            lastname,
+            email,
+            password: harshedpassword
+           });
+           const userRegdata = await user.save();
+           res.status(200).json(userRegdata);
             
     } catch (error) {
-            console.log(error)
-              res.status(500).json({message: error.message})
+        if (error.code === 11000 && error.keyValue.email){
+            res.status(409).json({message: "Email already exists! "})
         }
+        res.status(500).json({message: "Server Error!"})
+
+    }
 }
 
 const forgotpassword = async (req, res) =>{

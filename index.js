@@ -117,8 +117,10 @@ app.listen(3001, (req, res)=>{
 
 
 //connecting my app to the database
-mongoose.connect("mongodb+srv://olufunmilayoagboola:9XESzvepp00qYTuS@cluster0.oevanns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://olufunmilayoagboola:9XESzvepp00qYTuS@cluster0.oevanns.mongodb.net/Backend?retryWrites=true&w=majority&appName=Cluster0")
 //helps to manage request either successful or failed
+
+//mongodb+srv://olufunmilayoagboola:9XESzvepp00qYTuS@cluster0.oevanns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 .then(()=>{
     console.log("Connection Successful!")
 
