@@ -9,6 +9,7 @@ app.use(express.json()) //midware
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
 const Usermod = require('./models/UserModel.js')
+require('dotenv').config();
 
 // app.use(cors({
 //     origin: "http://localhost/3001",
@@ -16,8 +17,8 @@ const Usermod = require('./models/UserModel.js')
 //     allowHeaders: ['content-type']
 // }))
 
-app.use('/api/book', bookRouter)
-app.use('/auth/book', userRouter)
+app.use(process.env.APP_BOOK_ROUTE, bookRouter)
+app.use(process.env.APP_AUTH_ROUTE, userRouter)
 // app.use('/login', userRouter)
 
 // app.post('/login', async (req, res)=>{
@@ -117,7 +118,7 @@ app.listen(3001, (req, res)=>{
 
 
 //connecting my app to the database
-mongoose.connect("mongodb+srv://olufunmilayoagboola:9XESzvepp00qYTuS@cluster0.oevanns.mongodb.net/Backend?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(process.env.MONGODB_URL)
 //helps to manage request either successful or failed
 
 //mongodb+srv://olufunmilayoagboola:9XESzvepp00qYTuS@cluster0.oevanns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

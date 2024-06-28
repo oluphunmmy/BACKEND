@@ -2,7 +2,7 @@ const Usermod = require('../models/UserModel.js')
 const bcrypt = require('bcryptjs')
  const jwt = require('jsonwebtoken')
 
- const secret = "trop27@_^sjsk"
+ 
 
 const signin = async (req, res) =>{
     try{
@@ -18,9 +18,8 @@ const signin = async (req, res) =>{
                 }
                 
                 const payload = {userId: user._id}
-            const token = jwt.sign(payload, secret, {expiresIn: '1h'} )
+            const token = jwt.sign(payload, process.env.APP_SECRETE_KEY, {expiresIn: '1h'})
                 
-
                 res.json({
                     message: "Successful login",
                     token: token
@@ -29,7 +28,7 @@ const signin = async (req, res) =>{
     } catch (error){
 
 
-        res.status(500).json({message: "server error"})
+        res.status(500).json({message: error.message})
     }
 
 
