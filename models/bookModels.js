@@ -12,8 +12,13 @@ const bookSchema = mongoose.Schema({
     },
     publishedYear: {
         type: Number,
-        require
+        require: true
     },
+
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true
+    }
 
 },
 {

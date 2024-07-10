@@ -1,4 +1,6 @@
 const Book = require('../models/bookModels.js')
+const multer = require('multer');
+//const upload = multer({ storrage: multer.memoryStorage() });
 
 const createBooks = async(req, res)=>{
 
@@ -16,11 +18,14 @@ const createBooks = async(req, res)=>{
                 })
           }
 
-          const book = await Book.create(req.body)
+          const userId = req.user?.id;
+      //     console.log(userId, "User ID")
+          const bookData = {...req.body, createdBy: userId};
+          const book = await Book.create(bookData);
           res.status(200).json(book)
           
     } catch (error) {
-          console.log(error)
+          console.error(error)
           res.status(500).json({message: error.message})
     }
     
@@ -29,10 +34,20 @@ const createBooks = async(req, res)=>{
 
 const getBooks = async(req, res)=>{
     try {
-          const books = await Book.find({})
+          const userId = req.user?.id;
+          
+          let query= {};
+          if (userId) {
+            query = { createdBy: userId };
+          }
+          if(!userId){
+            return res.status(401).json({message: "Unauthorized! Please log in"});
+          }
+          const books = await Book.find(query)
           res.status(200).json({
-                count: books.length,
-                data: books
+            
+           count: books.length,
+            data: books
           });
 
     } catch (error) {

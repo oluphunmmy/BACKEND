@@ -10,7 +10,7 @@ const signin = async (req, res) =>{
         const user = await Usermod.findOne({email: email})
             
                 if(!user){
-                    return res.status(401).json({message: "Invalide email or password"})
+                    return res.status(401).json({message: "Invalid email or password"})
                 }
                 const isMatch = await bcrypt.compare(password, user.password)
                 if (!isMatch){
@@ -26,6 +26,7 @@ const signin = async (req, res) =>{
                 })
 
     } catch (error){
+        console.log(error)
 
 
         res.status(500).json({message: error.message})
@@ -69,6 +70,21 @@ const signup = async (req, res) =>{
     }
 }
 
+const verifyJWT = (req, res, next) =>{
+
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token){
+        return res.status(401).json({message: "Unauthorized user!"})
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.APP_SECRETE_KEY);
+        req.user = { id: decoded.userId };
+        next();
+    } catch (error) {
+        res.status(401).json({ message: 'Invalid token' });
+    }
+};
+
 const forgotpassword = async (req, res) =>{
 
     
@@ -81,5 +97,6 @@ module.exports = {
     signin,
     signup,
     forgotpassword,
-    verifyemail
+    verifyemail,
+    verifyJWT
 }
