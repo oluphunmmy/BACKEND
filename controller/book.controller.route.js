@@ -20,7 +20,8 @@ const createBooks = async(req, res)=>{
 
           const userId = req.user?.id;
       //     console.log(userId, "User ID")
-          const bookData = {...req.body, createdBy: userId};
+          const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+          const bookData = {...req.body, createdBy: userId,imageUrl: imageUrl};
           const book = await Book.create(bookData);
           res.status(200).json(book)
           
